@@ -11,7 +11,7 @@ collisionBox::collisionBox(int screenWidth, int screenHeight){
     this->screenWidth = screenWidth;
 }
 
-void collisionBox::init(int screenHeight, int screenWidth){
+void collisionBox::init(int screenWidth, int screenHeight){
     this->screenHeight = screenHeight;
     this->screenWidth = screenWidth;
 }
@@ -40,5 +40,62 @@ void collisionBox::checkCollisionWorld(entity* e){
     if (y + halfH > screenHeight) {
         e->setY(screenHeight - halfH);
         e->setVY(0);
+    }
+}
+
+void collisionBox::updateVisibility(entity* e){
+    enemy* en = dynamic_cast<enemy*>(e);
+
+    float halfW = en->getWidth() / 2.0f;
+    float halfH = en->getHeight() / 2.0f;
+
+    float x = en->getX();
+    float y = en->getY();
+
+    if (x + halfW < 0) {
+        en->setInvisible();
+        if(en->getTime() == 0)
+            en->setTime(static_cast<double>(SDL_GetTicks()) / 1000.0);
+        return;
+    }
+
+    if (x - halfW > screenWidth) {
+        en->setInvisible();
+        if(en->getTime() == 0)
+            en->setTime(static_cast<double>(SDL_GetTicks()) / 1000.0);
+        return;
+    }
+
+    if (y + halfH < 0) {
+        en->setInvisible();
+        if(en->getTime() == 0)
+            en->setTime(static_cast<double>(SDL_GetTicks()) / 1000.0);
+        return;
+    }
+
+    if (y - halfH > screenHeight) {
+        en->setInvisible();
+        if(en->getTime() == 0)
+            en->setTime(static_cast<double>(SDL_GetTicks()) / 1000.0);
+        return;
+    }
+
+    en->setVisible();
+    en->setTime(0.0);
+}
+
+void collisionBox::checkCollisions(entity* e){
+    player* p = dynamic_cast<player*>(e);
+    // checks all collisions that the Player class should care about
+    if(p){ 
+        checkCollisionWorld(p);
+        return;
+    }
+
+    enemy* en = dynamic_cast<enemy*>(e);
+    // checks all collisions that the Enemy class should care about
+    if(en){
+        updateVisibility(en);
+        return;
     }
 }

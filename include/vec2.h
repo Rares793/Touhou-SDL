@@ -1,34 +1,36 @@
 #ifndef VEC2_H
 #define VEC2_H
 
+#include  "utilities.h"
+using namespace usefulFunctions;
+// this will mainly be used for movement to describe the direction and the speed at which the enemy/bullets are moving
 class vec2{
     public:
         vec2();
         vec2(float x, float y);
-        float x() {return e[0];}
-        float y() {return e[1];}
-        vec2 operator-() const{ return vec2(-e[0], -e[1]);}
-        float operator[](int i) const{ return e[i];}
-        float& operator[](int i) { return e[i];}
-        const vec2& operator+=(const vec2& v){
-            e[0] = v.e[0];
-            e[1] = v.e[1];
-            return *this;
-        }
-
-        vec2& operator=(const vec2&v){
-            e[0] = v.e[0];
-            e[1] = v.e[1];
-            return *this;
-        }
-
-        vec2& operator*=(float t){
-            e[0] *= t;
-            e[1] *= t;
-            return *this;
-        }
-
+        float x() const;
+        float y() const;
+        vec2 operator-() const;
+        float operator[](int i) const;
+        float& operator[](int i);
+        const vec2& operator+=(const vec2& v);
+        vec2& operator=(const vec2&v);
+        vec2& operator*=(float t);
+        vec2& operator/=(float t);
+        float length() const;
+        float lengthSquared() const;
+        vec2 unitVector(const vec2& v);
         
+        static vec2 random(){
+            vec2 r(random_float(-1.0f, 1.0f), random_float(-1.0f, 1.0f));
+            return r.unitVector(r);
+        }
+
+        static vec2 random(float min, float max){
+            return vec2(random_float(min, max), random_float(min, max));
+        }
+
+        bool nearZero();
 
     private:
         float e[2];

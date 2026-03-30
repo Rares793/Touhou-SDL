@@ -8,6 +8,7 @@ class entity{
     virtual void render(SDL_Renderer* renderer) = 0;
     virtual void loadTexture(SDL_Renderer* renderer) = 0;
     virtual void init(SDL_Renderer* renderer) = 0;
+    virtual void update() = 0;
     //virtual void move() = 0;
     virtual void destroy() = 0;
     float getX() const{ return x; }

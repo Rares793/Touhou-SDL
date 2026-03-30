@@ -18,6 +18,7 @@ void enemy::loadTexture(SDL_Renderer* renderer) {
 }
 
 void enemy::render(SDL_Renderer* renderer){
+    // if no texture, don't try to render
     if(!texture)
         return;
 
@@ -46,4 +47,44 @@ void enemy::destroy(){
     }
 
     alive = false;
+    printf("Enemy has been destroyed");
+}
+
+void enemy::setInvisible(){
+    this->visible = false;
+}
+
+void enemy::setVisible(){
+    this->visible = true;
+}
+
+void enemy::setTime(double time){
+    this->timeLeftScreen = time;
+}
+
+double enemy::getTime(){
+    return this->timeLeftScreen;
+}
+
+void enemy::handleMovement(){
+    v = vec2::random();
+    vx = v.x() * movementSpeed;
+    vy = v.y() * movementSpeed;
+
+    x += vx;
+    y += vy;
+}
+
+
+void enemy::update(){
+    if(!alive)
+        return;
+
+    handleMovement();
+    
+    // if an enemy has been off the screen for too long, kill it
+    double now = static_cast<double>(SDL_GetTicks()) / 1000.0;
+    if(now - timeLeftScreen > maxInactiveTime && timeLeftScreen != 0.0 && !visible && alive)
+        destroy();
+    
 }
