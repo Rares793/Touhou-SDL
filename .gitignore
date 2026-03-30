@@ -1,0 +1,12 @@
+# build
+game
+*.o
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+assets/
