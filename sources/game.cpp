@@ -18,6 +18,7 @@ bool Game::init(){
 
     running = true;
     Player.init(renderer);
+    Enemy.init(renderer);
     screenHeight = 1920;
     screenWidth = 1080;
     cb.init(screenHeight, screenWidth);
@@ -34,7 +35,10 @@ void Game::handleEvents() {
 }
 
 void Game::update(){
-    Player.handleMovement(cb);
+    Player.update();
+    Enemy.update();
+    cb.checkCollisions(&Player);
+    cb.checkCollisions(&Enemy);
 }
 
 void Game::render(){
@@ -47,6 +51,7 @@ void Game::render(){
     SDL_RenderClear(renderer);
 
     Player.render(renderer);
+    Enemy.render(renderer);
     // Draw game objects here later
 
     SDL_RenderPresent(renderer);
@@ -64,6 +69,7 @@ void Game::run() {
 
 void Game::clean() {
     Player.destroy();
+    Enemy.destroy();
     if (renderer) {
         SDL_DestroyRenderer(renderer);
         renderer = nullptr;

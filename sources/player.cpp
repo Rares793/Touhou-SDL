@@ -1,7 +1,5 @@
 #include "../include/player.h"
-#include "../sources/collisionBox.cpp"
 
-collisionBox cb(1080,1920);
 void player::loadTexture(SDL_Renderer* renderer) {
     if (texture) {
         SDL_DestroyTexture(texture);
@@ -62,13 +60,15 @@ player::player(float x, float y){
     alive = true;
 }
 
-void player::handleMovement(collisionBox cb){
+void player::handleMovement(){
     handleInput();
 
     x += vx;
     y += vy;
+}
 
-    cb.checkCollisionWorld(this);
+void player::update(){
+    handleMovement();
 }
 
 void player::init(SDL_Renderer* renderer){

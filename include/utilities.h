@@ -2,18 +2,24 @@
     #define UTILITIES_H
 
     #include <iostream>
+    #include <cmath>
     #include <SDL3/SDL.h>
     #include <SDL3_image/SDL_image.h>
     #include <SDL3/SDL_render.h>
-   #define SCREEN_WIDTH 1920
-   #define SCREEN_HEIGHT 1080
 
-   struct Vector{
-    float x, y;
-    float normalize();
-   };
+    #define SCREEN_WIDTH 1920
+     #define SCREEN_HEIGHT 1080
 
-   float Vector::normalize(){
+    namespace usefulFunctions{
+        float inline random_float(){
+            // Returns a random real number in the [0, 1) range
+            return std::rand() / (RAND_MAX + 1.0);
+        }
 
-   }
-    #endif
+        float inline random_float(float min, float max){
+            // Returns a random real number in the [min, max) range
+            return min + (max - min) * random_float();
+        }
+        
+    }
+#endif

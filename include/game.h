@@ -3,6 +3,7 @@
 
 #include "collisionBox.h"
 #include "player.h"
+#include "enemy.h"
 
 class Game{
 public:
@@ -19,6 +20,7 @@ protected:
     SDL_Renderer* renderer {nullptr};
     SDL_Window* window {nullptr};
     player Player;
+    enemy Enemy;
     collisionBox cb;
     int screenWidth = 0, screenHeight = 0;
     bool running = false;
