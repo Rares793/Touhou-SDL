@@ -1,7 +1,7 @@
-#Working with git stuff:
+# Working with git stuff:
 git checkout -b feature/player-focus
 
-# code stuff...
+then code stuff...
 
 git add .
 git commit -m "add focus movement"
