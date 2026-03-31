@@ -1,4 +1,5 @@
 #include "../include/game.h"
+#include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
 
 bool Game::init(){
@@ -35,8 +36,8 @@ void Game::handleEvents() {
 }
 
 void Game::update(){
-    Player.update();
-    Enemy.update();
+    Player.update(dt);
+    Enemy.update(dt, &Player);
     cb.checkCollisions(&Player);
     cb.checkCollisions(&Enemy);
 }
@@ -58,12 +59,21 @@ void Game::render(){
 }
 
 void Game::run() {
+    double lastTime = SDL_GetTicks();
     while (running) {
+        double currentTime = SDL_GetTicks();
+        dt = (currentTime - lastTime) / 1000.0f;
+        lastTime = currentTime;
+        if (dt < 0.0001)
+            dt = 0.0001;
+
+        if (dt > 0.0333)
+            dt = 0.0333;
         handleEvents();
         update();
         render();
         // crude frame cap ~60 FPS
-        SDL_Delay(16);
+        //SDL_Delay(16);
     }
 }       
 
