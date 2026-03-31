@@ -26,6 +26,7 @@ void player::render(SDL_Renderer* renderer){
 }
 
 void player::handleInput() {
+    //should be vectorised later maybe
     float dx = 0.0f;
     float dy = 0.0f;
 
@@ -60,15 +61,15 @@ player::player(float x, float y){
     alive = true;
 }
 
-void player::handleMovement(){
+void player::handleMovement(double dt){
     handleInput();
 
-    x += vx;
-    y += vy;
+    x += vx * dt;
+    y += vy * dt;
 }
 
-void player::update(){
-    handleMovement();
+void player::update(double dt){
+    handleMovement(dt);
 }
 
 void player::init(SDL_Renderer* renderer){

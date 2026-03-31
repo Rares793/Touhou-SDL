@@ -8,7 +8,6 @@ class entity{
     virtual void render(SDL_Renderer* renderer) = 0;
     virtual void loadTexture(SDL_Renderer* renderer) = 0;
     virtual void init(SDL_Renderer* renderer) = 0;
-    virtual void update() = 0;
     //virtual void move() = 0;
     virtual void destroy() = 0;
     float getX() const{ return x; }
@@ -58,7 +57,7 @@ class entity{
     float vx = 0.0, vy = 0.0;
     float renderWidth = 0.0, renderHeight = 0.0;
     bool alive = false;
-    float movementSpeed = 20.0;
+    float movementSpeed = 300.0; //50 is good for shifting
     SDL_Texture* texture {nullptr};
 };
 #endif

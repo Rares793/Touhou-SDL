@@ -24,5 +24,6 @@ protected:
     collisionBox cb;
     int screenWidth = 0, screenHeight = 0;
     bool running = false;
+    double dt; // delta time
 };
 #endif
