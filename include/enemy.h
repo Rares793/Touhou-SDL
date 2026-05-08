@@ -2,7 +2,6 @@
 #define ENEMY_H
 
 #include "player.h"
-#include "vec2.h"
 
 enum class MoveType{
     Straight,

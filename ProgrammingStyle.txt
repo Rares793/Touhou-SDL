@@ -1,0 +1,13 @@
+This is an attempt to make a nice coding style for this project. A programming paradigm if I may be so bold.
+
+- Structs and classes will have the letters of each word upercase ex: CubicBezier, ListOfPoints etc PascalCase in other words
+- functions and variables are camelCase: doSomething.
+- functions always start with a verb
+- defines and enums are always ALL_CAPS
+- booleans are like a question: isAlive, shouldRender, isActive
+- private member variables should have a p_ prefix
+- rendering functions should have a R_ prefix
+- functions should have the first { on the same line as the definition and the } at the last part 
+- functions that return normalised vectors should have the N_ prefix
+- functions that return non-normalised vectors should have the n_ prefix
+

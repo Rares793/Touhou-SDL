@@ -39,7 +39,7 @@ enemy::enemy(float x, float y){
 void enemy::init(SDL_Renderer* renderer){
     loadTexture(renderer);
     state = EnemyState::Entering;
-
+    alive = true;
 }
 
 void enemy::destroy(){
@@ -68,6 +68,7 @@ double enemy::getTime(){
     return this->timeLeftScreen;
 }
 
+// the mmovement types will be moved in movementGeometry.h, while the AI logic will be its' own seperate class
 void enemy::moveStraight(double dt){
     //v = vec2::random(); // already normalised
     vx = v.x() * movementSpeed;
