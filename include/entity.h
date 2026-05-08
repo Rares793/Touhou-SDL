@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include "utilities.h"
+#include "vec2.h"
 
 class entity{
     public:

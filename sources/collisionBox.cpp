@@ -98,4 +98,11 @@ void collisionBox::checkCollisions(entity* e){
         updateVisibility(en);
         return;
     }
+
+    bullet* b = dynamic_cast<bullet*>(e);
+    // checks all collisions that the Bullet class should care about
+    if(b){
+        updateVisibility(b);
+        return;
+    }
 }
