@@ -16,7 +16,6 @@ private:
     void moveStraight(double dt, vec2 dir);
 
 protected:
-    float moveTimer = 0.0f, moveDuration = 5.0f;
     bool visible = false;
     double timeLeftScreen = 0.0;
     double totalTimeOffScreen = 0.0;

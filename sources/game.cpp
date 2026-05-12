@@ -1,6 +1,4 @@
 #include "../include/game.h"
-#include <SDL3/SDL_timer.h>
-#include <SDL3/SDL_video.h>
 
 bool Game::init(){
     SDL_SetAppMetadata("Touhou Wannabe", "0.1", "TH");
@@ -19,7 +17,8 @@ bool Game::init(){
 
     running = true;
     Player.init(renderer);
-    Enemy.init(renderer);
+    Enemy.en.init(renderer);
+    Enemy.enAI.init();
     screenHeight = 1920;
     screenWidth = 1080;
     cb.init(screenHeight, screenWidth);
@@ -37,9 +36,10 @@ void Game::handleEvents() {
 
 void Game::update(){
     Player.update(dt);
-    Enemy.update(dt, &Player);
+    Enemy.enAI.handleMovement(&Enemy.en, dt);
+    Enemy.en.update(dt);
     cb.checkCollisions(&Player);
-    cb.checkCollisions(&Enemy);
+    cb.checkCollisions(&Enemy.en);
 }
 
 void Game::render(){
@@ -52,7 +52,7 @@ void Game::render(){
     SDL_RenderClear(renderer);
 
     Player.render(renderer);
-    Enemy.render(renderer);
+    Enemy.en.render(renderer);
     // Draw game objects here later
 
     SDL_RenderPresent(renderer);
@@ -79,7 +79,7 @@ void Game::run() {
 
 void Game::clean() {
     Player.destroy();
-    Enemy.destroy();
+    Enemy.en.destroy();
     if (renderer) {
         SDL_DestroyRenderer(renderer);
         renderer = nullptr;

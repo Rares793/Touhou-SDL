@@ -46,17 +46,12 @@ struct PointList{
         size = 0;
     }
 
-    Node<T> getNodeAtPosition(int position) const{
-        if(position > size || position < 0)
-            return;
-
+    Node<T>* getNodeAtPosition(int position) const {
+        if(position >= size || position < 0)
+            return nullptr;
         Node<T>* current = head;
-        position--;
-        while(position){
+        while(position--)
             current = current->next;
-            position--;
-        }
-
         return current;
     }
 

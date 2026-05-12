@@ -9,8 +9,8 @@ class entity{
     virtual void render(SDL_Renderer* renderer) = 0;
     virtual void loadTexture(SDL_Renderer* renderer) = 0;
     virtual void init(SDL_Renderer* renderer) = 0;
-    //virtual void move() = 0;
     virtual void destroy() = 0;
+    
     float getX() const{ return x; }
 
     float getY() const{ return y; }
@@ -43,7 +43,10 @@ class entity{
 
     bool getAlive() const{ return alive; }
 
+    float getMovementSpeed(){ return movementSpeed;}
+
     SDL_FRect getRect() const {
+    // x,y are the center of the rectangle
     return SDL_FRect{
         x - renderWidth / 2.0f,
         y - renderHeight / 2.0f,
@@ -58,7 +61,7 @@ class entity{
     float vx = 0.0, vy = 0.0;
     float renderWidth = 0.0, renderHeight = 0.0;
     bool alive = false;
-    float movementSpeed = 300.0; //50 is good for shifting
+    float movementSpeed = 0.3;
     SDL_Texture* texture {nullptr};
 };
 #endif

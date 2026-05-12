@@ -74,6 +74,7 @@ void player::update(double dt){
 
 void player::init(SDL_Renderer* renderer){
     loadTexture(renderer);
+    movementSpeed = 300.0f;
 }
 
 void player::destroy(){

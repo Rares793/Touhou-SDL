@@ -45,6 +45,8 @@ void collisionBox::checkCollisionWorld(entity* e){
 
 void collisionBox::updateVisibility(entity* e){
     enemy* en = dynamic_cast<enemy*>(e);
+    if(!en)
+        return;
 
     float halfW = en->getWidth() / 2.0f;
     float halfH = en->getHeight() / 2.0f;

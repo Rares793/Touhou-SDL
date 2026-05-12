@@ -37,6 +37,11 @@ class vec2{
         static vec2 polarToCartesian(float angle, float speed = 1.0f);
         bool nearZero();
 
+        vec2(const vec2& v) {
+            e[0] = v.e[0];
+            e[1] = v.e[1];
+        }
+        
     private:
         float e[2];
 };
@@ -45,6 +50,7 @@ vec2 operator-(const vec2& u, const vec2& v);
 vec2 operator*(const vec2& v, float t);
 vec2 operator*(float t, const vec2& v);
 vec2 operator/(const vec2& v, float t);
+
 
 extern vec2 errorVector;
 

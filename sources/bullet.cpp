@@ -1,4 +1,5 @@
 #include "../include/bullet.h"
+#include <SDL3/SDL_render.h>
 
 void bullet::init(SDL_Renderer* renderer){
     loadTexture(renderer);
@@ -46,4 +47,12 @@ void bullet::update(double dt){
     double now = static_cast<double>(SDL_GetTicks()) / 1000.0;
     if(now - timeLeftScreen > maxInactiveTime && timeLeftScreen != 0.0 && !visible && alive)
         destroy();
+}
+        
+void bullet::render(SDL_Renderer* renderer){
+    if(!texture || !visible)
+        return;
+
+    SDL_FRect rect = getRect();
+    SDL_RenderTexture(renderer, texture, nullptr, &rect);
 }

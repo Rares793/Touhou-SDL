@@ -4,6 +4,12 @@
 #include "collisionBox.h"
 #include "player.h"
 #include "enemy.h"
+#include "AI.h"
+
+struct EnemyObject{
+    enemy en;
+    ai enAI;
+};
 
 class Game{
 public:
@@ -20,7 +26,7 @@ protected:
     SDL_Renderer* renderer {nullptr};
     SDL_Window* window {nullptr};
     player Player;
-    enemy Enemy;
+    EnemyObject Enemy;
     collisionBox cb;
     int screenWidth = 0, screenHeight = 0;
     bool running = false;
